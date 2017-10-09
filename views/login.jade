@@ -1,0 +1,88 @@
+doctype html
+html(lang='en-US')
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        title #{title}
+        //if lt IE 9
+            script(src='http//css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js')
+            script(src='http//html5shiv.googlecode.com/svn/trunk/html5.js')
+            script(src='Javascript/Flot/excanvas.js')
+        // The Fonts
+        link(href='http//fonts.googleapis.com/css?family=Oswald|Droid+Sans:400,700', rel='stylesheet')
+        // The Main CSS File
+        link(rel='stylesheet', href='CSS/style.css')
+        // jQuery
+        script(src='Javascript/jQuery/jquery-1.7.2.min.js')
+        // Flot
+        script(src='Javascript/Flot/jquery.flot.js')
+        script(src='Javascript/Flot/jquery.flot.resize.js')
+        script(src='Javascript/Flot/jquery.flot.pie.js')
+        // DataTables
+        script(src='Javascript/DataTables/jquery.dataTables.min.js')
+        // ColResizable
+        script(src='Javascript/ColResizable/colResizable-1.3.js')
+        // jQuryUI
+        script(src='Javascript/jQueryUI/jquery-ui-1.8.21.min.js')
+        // Uniform
+        script(src='Javascript/Uniform/jquery.uniform.js')
+        // Tipsy
+        script(src='Javascript/Tipsy/jquery.tipsy.js')
+        // Elastic
+        script(src='Javascript/Elastic/jquery.elastic.js')
+        // ColorPicker
+        script(src='Javascript/ColorPicker/colorpicker.js')
+        // SuperTextarea
+        script(src='Javascript/SuperTextarea/jquery.supertextarea.min.js')
+        // UISpinner
+        script(src='Javascript/UISpinner/ui.spinner.js')
+        // MaskedInput
+        script(src='Javascript/MaskedInput/jquery.maskedinput-1.3.js')
+        // ClEditor
+        script(src='Javascript/ClEditor/jquery.cleditor.js')
+        // Full Calendar
+        script(src='Javascript/FullCalendar/fullcalendar.js')
+        // Color Box
+        script(src='Javascript/ColorBox/jquery.colorbox.js')
+        // Kanrisha Script
+        script(src='Javascript/kanrisha.js')
+    body
+        // Change Pattern
+        .changePattern
+            span#pattern1
+            span#pattern2
+            span#pattern3
+            span#pattern4
+            span#pattern5
+            span#pattern6
+        // Top Panel
+        //.top_panel
+        //    .wrapper
+        //        .user
+        //            img.user_avatar(src='Images/user_avatar.png', alt='user_avatar')
+        //            //span.label
+        //               // a(href='#') Sign Up
+        .wrapper.contents_wrapper
+            .login
+                .widget_header
+                    h4.widget_header_title.wwIcon.i_16_login Login to Management System
+                .widget_contents.lgNoPadding
+                    form(method='post', action='/login')
+                        .line_grid
+                            .g_2.g_2M
+                                span.label User
+                            .g_10.g_10M
+                                input.simple_field.tooltip(title='Your Username', type='text', placeholder='Username')
+                            .clear
+                        .line_grid
+                            .g_2.g_2M
+                                span.label Pass
+                            .g_10.g_10M
+                                input.simple_field.tooltip(title='Your Password', type='password', value='password')
+                            .clear
+                        .line_grid
+                            .g_6
+                                input.submitIt.simple_buttons(value='Log In', type='submit')
+                            .clear
+        div(style='display:none')
+            script(src='http//v7.cnzz.com/stat.php?id=155540&web_id=155540', language='JavaScript', charset='gb2312')
