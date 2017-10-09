@@ -3,7 +3,16 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
+var mongodb = require('mongodb');
+var mongoose = require('mongoose');
+var multer = require('multer');
+var passport = require('passport');
+var passportHttp = require('passport-http');
+var flash = require('connect-flash');
+var LocalStrategy = require('passport-local').Strategy;
+var expressValidator = require('express-validator');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -16,6 +25,40 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// Handle db models
+global.db = mongoose.connect("mongodb://127.0.0.1:3101/goodsManagement");
+global.dbHandle = require("./dbModels/dbHandles");
+
+
+// Handle session to store user status
+app.use(session({
+    secret: 'woaiwyhty',
+    saveUninitialized: true,
+    resave: true
+}));
+
+// Handle Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Handle express-validator
+app.use(expressValidator({
+    errorFormatter: function(param, msg, value) {
+        var namespace = param.split('.')
+            , root    = namespace.shift()
+            , formParam = root;
+
+        while(namespace.length) {
+            formParam += '[' + namespace.shift() + ']';
+        }
+        return {
+            param : formParam,
+            msg   : msg,
+            value : value
+        };
+    }
+}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
