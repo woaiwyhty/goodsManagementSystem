@@ -47,6 +47,7 @@ html(lang='en-US')
         // Kanrisha Script
         script(src='Javascript/kanrisha.js')
     body
+        != messages()
         // Change Pattern
         .changePattern
             span#pattern1
@@ -62,6 +63,10 @@ html(lang='en-US')
         //            img.user_avatar(src='Images/user_avatar.png', alt='user_avatar')
         //            //span.label
         //               // a(href='#') Sign Up
+
+        if errors
+            each error, i in errors
+                p #{error.msg}
         .wrapper.contents_wrapper
             .login
                 .widget_header
@@ -72,13 +77,13 @@ html(lang='en-US')
                             .g_2.g_2M
                                 span.label User
                             .g_10.g_10M
-                                input.simple_field.tooltip(title='Your Username', type='text', placeholder='Username')
+                                input.simple_field.tooltip(name='username', title='Your Username', type='text', placeholder='Username')
                             .clear
                         .line_grid
                             .g_2.g_2M
                                 span.label Pass
                             .g_10.g_10M
-                                input.simple_field.tooltip(title='Your Password', type='password', value='password')
+                                input.simple_field.tooltip(name='password', title='Your Password', type='password', value='password')
                             .clear
                         .line_grid
                             .g_6
