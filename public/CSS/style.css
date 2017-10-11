@@ -1034,6 +1034,10 @@
 		background: url("../Images/Icons/16/i_16_add.png") no-repeat scroll transparent;
 	}
 
+	.i_16_close {
+		background: url("../Images/Icons/16/i_16_close.png") no-repeat scroll transparent;
+	}
+
 	.i_16_progress {
 		background: url("../Images/Icons/16/i_16_progress.png") no-repeat scroll transparent;
 	}
@@ -1060,6 +1064,10 @@
 
 	.i_16_logout {
 		background: url("../Images/Icons/16/i_16_logout.png") no-repeat scroll transparent;
+	}
+
+	.i_22_logout {
+		background: url("../Images/Icons/22/i_22_logout.png") no-repeat scroll transparent;
 	}
 
 	.i_22_inbox {
