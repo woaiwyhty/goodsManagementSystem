@@ -90,6 +90,25 @@ html(lang='en-US')
                             span.tab_label Forms
                             span.tab_info Some Fields
             .contents
+                #dialog-form
+                    .widget_contents.noPadding
+                        .line_grid
+                            .g_3
+                                span.label Simple Text Field
+                            .g_9
+                                input.simple_field(type='text')
+                        .line_grid
+                            .g_3
+                                span.label With Placeholder
+                            .g_9
+                                input.simple_field(type='text', placeholder='Any Stuff ..')
+                        .line_grid
+                            .g_3
+                                span.label With Predefined Value
+                            .g_9
+                                input.simple_field(type='text', value='google')
+
+
                 div.StoragePanel(class = (activeTab != "Storage" ? "hideSelf" : "showSelf"))
                     .g_6.contents_header
                         h3.i_16_table.tab_label Staff
@@ -133,6 +152,7 @@ html(lang='en-US')
                         div
                             span.label Add, update or remove users
                     .g_12
+
                         .widget_contents.noPadding
                             table.datatable.tables.Userslist
                                 thead
@@ -162,6 +182,6 @@ html(lang='en-US')
                                                                 a.i_16_forms.updateUser(href='#', title='Update User', id=i + 1)
                                                                     span.label Update User
                                                             li
-                                                                a.i_16_close.removeUser(href='#', title='Remove User', id=i + 1)
+                                                                a.i_16_close.removeUser.bdcC(href='#', title='Remove User', id=i + 1)
                                                                     span.label Remove User
 
