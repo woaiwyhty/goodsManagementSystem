@@ -24,12 +24,17 @@ router.get('/staff', ensureAuthenticated, function(req, res, next) {
        }
         res.render('main', renderData);
     });
-    
+
 });
 router.get('/storage', ensureAuthenticated, function(req, res, next) {
     res.render('main', { UsersArr: [{username: "woaiwyhty", authority: "super admin", department: "admin"}],
         mainTitle: "Welcome to Dashboard", loginName: req.session.user.username, activeTab: "Storage"});
 });
+
+
+
+
+
 function ensureAuthenticated(req, res, next){
     if(req.session.user){
         return next();

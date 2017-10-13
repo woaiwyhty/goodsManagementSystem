@@ -38,7 +38,13 @@ router.post('/login',
         res.redirect('/main');
     }
 );
-
+router.post('/removeUser', ensureAuthenticated, function(req, res, next) {
+    User.removeUserByName(req.body.username, function(err, doc) {
+        if(err) return next();
+        res.status(200);
+        res.send({retCode: 0});
+    });
+});
 
 
 passport.serializeUser(function(user, done) {
