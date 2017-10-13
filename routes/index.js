@@ -46,6 +46,15 @@ router.post('/removeUser', ensureAuthenticated, function(req, res, next) {
     });
 });
 
+router.post('/newUser', ensureAuthenticated, function(req, res, next) {
+    var info = { username: req.body.username, password: req.body.password,
+        role: req.body.role, department: req.body.department};
+    User.addUser(info, function(err, doc) {
+        if(err) return next();
+        res.status(200);
+        res.send({retCode: 0});
+    });
+});
 
 passport.serializeUser(function(user, done) {
     done(null, user.id); //store login status
