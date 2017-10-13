@@ -134,16 +134,18 @@ html(lang='en-US')
                             span.label Add, update or remove users
                     .g_12
                         .widget_contents.noPadding
-                            table.datatable.tables
+                            table.datatable.tables.Userslist
                                 thead
                                     tr
+                                        th id
                                         th Username
                                         th Authority
                                         th Department
                                         th Operations
                                 tbody
-                                    for user in UsersArr
+                                    for user,i in UsersArr
                                         tr
+                                            td= i + 1
                                             td= user.username
                                             td= user.authority
                                             td= user.department
@@ -154,12 +156,12 @@ html(lang='en-US')
                                                         // Drop Menu
                                                         ul.drop_menu.menu_with_icons.right_direction
                                                             li
-                                                                a.i_16_add(href='#', title='New User')
+                                                                a.i_16_add.addUser(href='#', title='New User', id=i + 1)
                                                                     span.label New User
                                                             li
-                                                                a.i_16_forms(href='#', title='Update User')
+                                                                a.i_16_forms.updateUser(href='#', title='Update User', id=i + 1)
                                                                     span.label Update User
                                                             li
-                                                                a.i_16_close(href='#', title='Remove User')
+                                                                a.i_16_close.removeUser(href='#', title='Remove User', id=i + 1)
                                                                     span.label Remove User
 
