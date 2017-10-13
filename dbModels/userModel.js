@@ -6,7 +6,7 @@ module.exports = {
         username: {type: String, required: true},
         password: {type: String, required: true},
         role: {type: Number},// 0 means super admin, 1 means department admin, 2 means simple admin
-        department: {type: Number}
+        department: {type: String}
     },
     department: {
         name: {type: String},

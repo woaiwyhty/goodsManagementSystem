@@ -12,6 +12,7 @@ html(lang='en-US')
         link(href='http//fonts.googleapis.com/css?family=Oswald|Droid+Sans:400,700', rel='stylesheet')
         // The Main CSS File
         link(rel='stylesheet', href='/CSS/style.css')
+
         // jQuery
         script(src='/Javascript/jQuery/jquery-1.7.2.min.js')
         // Flot
@@ -46,6 +47,7 @@ html(lang='en-US')
         script(src='/Javascript/ColorBox/jquery.colorbox.js')
         // Kanrisha Script
         script(src='/Javascript/kanrisha.js')
+        script(src='/Javascript/mainEvents.js')
         meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
     body
         // Top Panel
@@ -76,7 +78,7 @@ html(lang='en-US')
             aside.sidebar
                 ul.tab_nav
                     li.i_32_ui(class = (activeTab == "Staff" ? "active_tab" : ""))
-                        a(href='/main/staff', title='Employee')
+                        a(href='/main/staff', title='Employee', class='StaffPage')
                             span.tab_label Staff
                             span.tab_info Management
                     li.i_32_tables(class = (activeTab == "Storage" ? "active_tab" : ""))
@@ -103,6 +105,26 @@ html(lang='en-US')
                                         th Department
                                         th Operations
                                 tbody
+                                    for user in UsersArr
+                                        tr
+                                            td= user.username
+                                            td= user.authority
+                                            td= user.department
+                                            td
+                                                .simple_buttons
+                                                    .bwIcon.i_16_settings Operate
+                                                    .buttons_arrow
+                                                        // Drop Menu
+                                                        ul.drop_menu.menu_with_icons.right_direction
+                                                            li
+                                                                a.i_16_add(href='#', title='New User')
+                                                                    span.label New User
+                                                            li
+                                                                a.i_16_forms(href='#', title='Update User')
+                                                                    span.label Update User
+                                                            li
+                                                                a.i_16_close(href='#', title='Remove User')
+                                                                    span.label Remove User
 
 
                 div.StaffPanel(class = (activeTab != "Staff" ? "hideSelf" : "showSelf"))

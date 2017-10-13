@@ -13,6 +13,15 @@ var User = {
     getUserIDbyID: function(id, callback) {
         var userModel = global.dbHandle.getModel('users');
         userModel.findOne({id: id}, callback);
+    },
+    getAllUsers: function(roles, callback) {
+        var userModel = global.dbHandle.getModel('users');
+        var queryStr;
+        if(typeof(roles) == undefined) queryStr = {};
+        else {
+            queryStr = { role : { $gte : roles}};
+        }
+        userModel.find(queryStr, callback);
     }
 };
 
