@@ -22,6 +22,10 @@ var User = {
             queryStr = { role : { $gte : roles}};
         }
         userModel.find(queryStr, callback);
+    },
+    removeUserByName: function(username, callback) {
+        var userModel = global.dbHandle.getModel('users');
+        userModel.remove({ username: username}, callback);
     }
 };
 
