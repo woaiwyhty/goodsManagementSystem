@@ -2375,3 +2375,7 @@
 	#pattern6 {
 		background: url("../Images/Patterns/pattern6.png") no-repeat 0 0;
 	}
+
+	div.hideSelf {
+		display: none;
+	}

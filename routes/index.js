@@ -24,11 +24,7 @@ function ensureAuthenticatedInLogin(req, res, next) {
 router.get('/login', ensureAuthenticatedInLogin, function(req, res, next) {
     res.render('login', { title: 'Login'});
 });
-router.get('/main', ensureAuthenticated, function(req, res, next) {
 
-   res.render('main', { UsersArr: [{username: "woaiwyhty", authority: "super admin", department: "admin"}],
-                        mainTitle: "Welcome to Dashboard", loginName: req.session.user.username});
-});
 
 router.post('/login',
     passport.authenticate('local',

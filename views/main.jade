@@ -11,48 +11,48 @@ html(lang='en-US')
         // The Fonts
         link(href='http//fonts.googleapis.com/css?family=Oswald|Droid+Sans:400,700', rel='stylesheet')
         // The Main CSS File
-        link(rel='stylesheet', href='CSS/style.css')
+        link(rel='stylesheet', href='/CSS/style.css')
         // jQuery
-        script(src='Javascript/jQuery/jquery-1.7.2.min.js')
+        script(src='/Javascript/jQuery/jquery-1.7.2.min.js')
         // Flot
-        script(src='Javascript/Flot/jquery.flot.js')
-        script(src='Javascript/Flot/jquery.flot.resize.js')
-        script(src='Javascript/Flot/jquery.flot.pie.js')
+        script(src='/Javascript/Flot/jquery.flot.js')
+        script(src='/Javascript/Flot/jquery.flot.resize.js')
+        script(src='/Javascript/Flot/jquery.flot.pie.js')
         // DataTables
-        script(src='Javascript/DataTables/jquery.dataTables.min.js')
+        script(src='/Javascript/DataTables/jquery.dataTables.min.js')
         // ColResizable
-        script(src='Javascript/ColResizable/colResizable-1.3.js')
+        script(src='/Javascript/ColResizable/colResizable-1.3.js')
         // jQuryUI
-        script(src='Javascript/jQueryUI/jquery-ui-1.8.21.min.js')
+        script(src='/Javascript/jQueryUI/jquery-ui-1.8.21.min.js')
         // Uniform
-        script(src='Javascript/Uniform/jquery.uniform.js')
+        script(src='/Javascript/Uniform/jquery.uniform.js')
         // Tipsy
-        script(src='Javascript/Tipsy/jquery.tipsy.js')
+        script(src='/Javascript/Tipsy/jquery.tipsy.js')
         // Elastic
-        script(src='Javascript/Elastic/jquery.elastic.js')
+        script(src='/Javascript/Elastic/jquery.elastic.js')
         // ColorPicker
-        script(src='Javascript/ColorPicker/colorpicker.js')
+        script(src='/Javascript/ColorPicker/colorpicker.js')
         // SuperTextarea
-        script(src='Javascript/SuperTextarea/jquery.supertextarea.min.js')
+        script(src='/Javascript/SuperTextarea/jquery.supertextarea.min.js')
         // UISpinner
-        script(src='Javascript/UISpinner/ui.spinner.js')
+        script(src='/Javascript/UISpinner/ui.spinner.js')
         // MaskedInput
-        script(src='Javascript/MaskedInput/jquery.maskedinput-1.3.js')
+        script(src='/Javascript/MaskedInput/jquery.maskedinput-1.3.js')
         // ClEditor
-        script(src='Javascript/ClEditor/jquery.cleditor.js')
+        script(src='/Javascript/ClEditor/jquery.cleditor.js')
         // Full Calendar
-        script(src='Javascript/FullCalendar/fullcalendar.js')
+        script(src='/Javascript/FullCalendar/fullcalendar.js')
         // Color Box
-        script(src='Javascript/ColorBox/jquery.colorbox.js')
+        script(src='/Javascript/ColorBox/jquery.colorbox.js')
         // Kanrisha Script
-        script(src='Javascript/kanrisha.js')
+        script(src='/Javascript/kanrisha.js')
         meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
     body
         // Top Panel
         .top_panel
             .wrapper
                 .user
-                    img.user_avatar(src='Images/user_avatar.png', alt='user_avatar')
+                    img.user_avatar(src='/Images/user_avatar.png', alt='user_avatar')
                     span.label #{loginName}
                 .top_links
                     ul
@@ -63,7 +63,7 @@ html(lang='en-US')
             .wrapper
                 .logo
                     a(href='#', title='Kanrisha Home')
-                        img(src='Images/kanrisha_logo.png', alt='kanrisha_logo')
+                        img(src='/Images/kanrisha_logo.png', alt='kanrisha_logo')
         .wrapper.small_menu
             ul.menu_small_buttons
                 li
@@ -75,51 +75,69 @@ html(lang='en-US')
         .wrapper.contents_wrapper
             aside.sidebar
                 ul.tab_nav
-                    li.active_tab.i_32_ui
-                        a(href='ui.html', title='Employee')
+                    li.i_32_ui(class = (activeTab == "Staff" ? "active_tab" : ""))
+                        a(href='/main/staff', title='Employee')
                             span.tab_label Staff
                             span.tab_info Management
-                    li.i_32_tables
-                        a(href='tables.html', title='Some Rows')
+                    li.i_32_tables(class = (activeTab == "Storage" ? "active_tab" : ""))
+                        a(href='/main/storage', title='Some Rows')
                             span.tab_label Tables
                             span.tab_info Some Rows
                     li.i_32_forms
-                        a(href='forms.html', title='Some Fields')
+                        a(href='#', title='Some Fields')
                             span.tab_label Forms
                             span.tab_info Some Fields
             .contents
-                // Column Resize-Able
-                .g_6.contents_header
-                    h3.i_16_table.tab_label Staff
-                    div
-                        span.label Add, update or remove users
-                .g_12
-                    .widget_contents.noPadding
-                        table.datatable.tables
-                            thead
-                                tr
-                                    th Username
-                                    th Authority
-                                    th Department
-                                    th Operations
-                            tbody
-                                for user in UsersArr
+                div.StoragePanel(class = (activeTab != "Storage" ? "hideSelf" : "showSelf"))
+                    .g_6.contents_header
+                        h3.i_16_table.tab_label Staff
+                        div
+                            span.label Add, update or remove users
+                    .g_12
+                        .widget_contents.noPadding
+                            table.datatable.tables
+                                thead
                                     tr
-                                        td= user.username
-                                        td= user.authority
-                                        td= user.department
-                                        td
-                                            .simple_buttons
-                                                .bwIcon.i_16_settings Operate
-                                                .buttons_arrow
-                                                    // Drop Menu
-                                                    ul.drop_menu.menu_with_icons.right_direction
-                                                        li
-                                                            a.i_16_add(href='#', title='New User')
-                                                                span.label New User
-                                                        li
-                                                            a.i_16_forms(href='#', title='Update User')
-                                                                span.label Update User
-                                                        li
-                                                            a.i_16_close(href='#', title='Remove User')
-                                                                span.label Remove User
+                                        th Username
+                                        th Authority
+                                        th Department
+                                        th Operations
+                                tbody
+
+
+                div.StaffPanel(class = (activeTab != "Staff" ? "hideSelf" : "showSelf"))
+                    .g_6.contents_header
+                        h3.i_16_table.tab_label Staff
+                        div
+                            span.label Add, update or remove users
+                    .g_12
+                        .widget_contents.noPadding
+                            table.datatable.tables
+                                thead
+                                    tr
+                                        th Username
+                                        th Authority
+                                        th Department
+                                        th Operations
+                                tbody
+                                    for user in UsersArr
+                                        tr
+                                            td= user.username
+                                            td= user.authority
+                                            td= user.department
+                                            td
+                                                .simple_buttons
+                                                    .bwIcon.i_16_settings Operate
+                                                    .buttons_arrow
+                                                        // Drop Menu
+                                                        ul.drop_menu.menu_with_icons.right_direction
+                                                            li
+                                                                a.i_16_add(href='#', title='New User')
+                                                                    span.label New User
+                                                            li
+                                                                a.i_16_forms(href='#', title='Update User')
+                                                                    span.label Update User
+                                                            li
+                                                                a.i_16_close(href='#', title='Remove User')
+                                                                    span.label Remove User
+
