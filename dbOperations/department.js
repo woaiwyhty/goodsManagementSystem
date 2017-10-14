@@ -4,14 +4,14 @@
 
 var Department = {
     getAllDepartments: function(callback) {
-        var model = global.dbHandle.getModel('department');
+        var model = global.dbHandle.getModel('departments');
         //console.log(username);
         model.find({}, callback);
     },
     addDepartment: function(info, callback) {
-        var model = global.dbHandle.getModel('department');
+        var model = global.dbHandle.getModel('departments');
         model.create(info, callback);
     }
 };
 
-module.exports = User;
+module.exports = Department;
