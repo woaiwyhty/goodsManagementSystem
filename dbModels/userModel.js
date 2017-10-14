@@ -8,14 +8,14 @@ module.exports = {
         role: {type: Number},// 0 means super admin, 1 means department admin, 2 means simple admin
         department: {type: String}
     },
-    department: {
+    departments: {
         name: {type: String},
         departmentAdminCnt: {type: Number},
         simpleEmployeeCnt:  {type: Number},
-        goodsCnt: {type: Number},
-        departmentId: {type: Number}
+        goodsCnt: {type: Number}
+
     },
-    supplier: {
+    suppliers: {
         name: {type: String},
         phone: {type: String},
         addr: {type: String},
@@ -23,7 +23,7 @@ module.exports = {
         supplyProductId: {type: String},
         supplierId: {type: Number}
     },
-    productsStock:  {
+    productsStocks:  {
         name: {type: String},
         supplierId: {type: Number},
         productId: {type: Number},
@@ -32,7 +32,7 @@ module.exports = {
         stockData: {type: Date},
         stockId: {type: Number}
     },
-    productInformation: {
+    productInformations: {
         name: {type: String},
         productId: {type: Number},
         price: {type:  Number},
