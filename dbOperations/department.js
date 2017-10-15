@@ -14,6 +14,9 @@ var Department = {
     },
     idNumberInc: function(callback) {
         ids.findOneAndUpdate({name: 'departments'}, {$inc: {idNumber: 1}}, {new: true}, callback);
+    },
+    getIdByName: function(name, callback) {
+        model.findOne({name: name}, callback);
     }
 };
 
