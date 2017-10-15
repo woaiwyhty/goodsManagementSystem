@@ -1,41 +1,53 @@
 /**
  * Created by dell on 2017/9/6.
  */
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 module.exports = {
     users: {
-        username: {type: String, required: true},
+        username: {type: String, required: true, index: 1, unique: true},
         password: {type: String, required: true},
         role: {type: Number},// 0 means super admin, 1 means department admin, 2 means simple admin
-        department: {type: String}
+        department: {type: String},
+        idNumber: {type: Number},
+        departmentId: {type: Schema.Types.ObjectId, ref: 'departments'}
     },
     departments: {
-        name: {type: String},
+        name: {type: String, required: true, index: 1, unique: true},
         departmentAdminCnt: {type: Number},
         simpleEmployeeCnt:  {type: Number},
-        goodsCnt: {type: Number}
-
+        goodsCnt: {type: Number},
+        idNumber: {type: Number}
     },
     suppliers: {
-        name: {type: String},
+        name: {type: String, required: true, index: 1, unique: true},
         phone: {type: String},
         addr: {type: String},
         postCode: {type: String},
-        supplyProductId: {type: String},
-        supplierId: {type: Number}
+        idNumber: {type: Number}
     },
     productsStocks:  {
-        name: {type: String},
-        supplierId: {type: Number},
-        productId: {type: Number},
-        positionId: {type: Number},
+        name: {type: String, required: true, index: 1, unique: true},
+        productId: {type: Schema.Types.ObjectIda, ref: 'productinformations'},
+        positionId: {type: Schema.Types.ObjectId, ref: 'positions'},
+        supplierName: {type: String},
+        supplierId: {type: Schema.Types.ObjectId, ref: 'suppliers'},
+        price: {type: String},
+        positionName: {type: String},
         count: {type: Number},
         stockData: {type: Date},
-        stockId: {type: Number}
+        idNumber: {type: Number}
     },
     productInformations: {
-        name: {type: String},
-        productId: {type: Number},
+        name: {type: String, required:true, index: 1},
         price: {type:  Number},
-        productType: {type: String}
+        productType: {type: String},
+        supplierName: {type: String},
+        supplierId: {type: Object},
+        idNumber: {type: Number}
+    },
+    ids: {
+        name: {type: String, required: true, unique: true},
+        idNumber: {type: Number, required: true}
     }
 };
