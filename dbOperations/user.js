@@ -1,9 +1,11 @@
 /**
  * Created by dell on 2017/10/8.
  */
+var dbHandle = require("../dbModels/dbHandles");
+var userModel = dbHandle.getModel('users');
+var ids = dbHandle.getModel('ids');
 var User = {
     getUserNameByName: function(username, callback) {
-        var userModel = global.dbHandle.getModel('users');
         //console.log(username);
         userModel.findOne({username: username}, callback);
     },
@@ -11,25 +13,25 @@ var User = {
         return pwd == pwd1;
     },
     getUserIDbyID: function(id, callback) {
-        var userModel = global.dbHandle.getModel('users');
         userModel.findOne({id: id}, callback);
     },
     getAllUsers: function(roles, callback) {
-        var userModel = global.dbHandle.getModel('users');
         var queryStr;
         if(typeof(roles) == undefined) queryStr = {};
         else {
             queryStr = { role : { $gte : roles}};
         }
-        userModel.find(queryStr, callback);
+        //userModel.find(queryStr, callback);
+        userModel.find(queryStr).populate('departmentId', 'name', null).exec(callback);
     },
     removeUserByName: function(username, callback) {
-        var userModel = global.dbHandle.getModel('users');
         userModel.remove({ username: username}, callback);
     },
     addUser: function(info, callback) {
-        var userModel = global.dbHandle.getModel('users');
         userModel.create(info, callback);
+    },
+    idNumberInc: function(callback) {
+        ids.findOneAndUpdate({name: 'users'}, {$inc: {idNumber: 1}}, {new: true}, callback);
     }
 };
 
