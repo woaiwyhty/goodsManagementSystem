@@ -27,7 +27,7 @@ module.exports = {
         idNumber: {type: Number}
     },
     productsStocks:  {
-        name: {type: String, required: true, index: 1, unique: true},
+        name: {type: String, required: true, index: 1},
         productId: {type: Schema.Types.ObjectIda, ref: 'productinformations'},
         positionId: {type: Schema.Types.ObjectId, ref: 'positions'},
         supplierName: {type: String},
@@ -49,5 +49,9 @@ module.exports = {
     ids: {
         name: {type: String, required: true, unique: true},
         idNumber: {type: Number, required: true}
+    },
+    positions: {
+        name: {type: String, required:true, index: 1},
+        idNumber: {type: Number}
     }
 };
