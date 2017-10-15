@@ -32,18 +32,17 @@ module.exports = {
         positionId: {type: Schema.Types.ObjectId, ref: 'positions'},
         supplierName: {type: String},
         supplierId: {type: Schema.Types.ObjectId, ref: 'suppliers'},
-        price: {type: String},
+        price: {type: Number},
         positionName: {type: String},
         count: {type: Number},
-        stockData: {type: Date},
+        stockDate: {type: Date},
         idNumber: {type: Number}
     },
     productInformations: {
         name: {type: String, required:true, index: 1},
         price: {type:  Number},
         productType: {type: String},
-        supplierName: {type: String},
-        supplierId: {type: Object},
+        supplierId: {type: Schema.Types.ObjectId, ref: 'suppliers'},
         idNumber: {type: Number}
     },
     ids: {
