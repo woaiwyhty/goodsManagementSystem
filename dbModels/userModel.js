@@ -28,7 +28,7 @@ module.exports = {
     },
     productsStocks:  {
         name: {type: String, required: true, index: 1},
-        productId: {type: Schema.Types.ObjectIda, ref: 'productinformations'},
+        productId: {type: Schema.Types.ObjectId, ref: 'productinformations'},
         positionId: {type: Schema.Types.ObjectId, ref: 'positions'},
         supplierName: {type: String},
         supplierId: {type: Schema.Types.ObjectId, ref: 'suppliers'},
