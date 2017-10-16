@@ -69,66 +69,122 @@ html(lang='en-US')
         .wrapper.small_menu
             ul.menu_small_buttons
                 li
-                    a.i_22_ui(title='Staff', href='ui.html')
+                    a.i_22_ui(title='Staff', href='/main/staff')
                 li
-                    a.i_22_tables(title='Some Rows', href='tables.html')
+                    a.i_22_tables(title='Storage', href='/main/storage')
                 li
-                    a.i_22_forms(title='Some Fields', href='forms.html')
+                    a.i_22_forms(title='Department', href='/main/division')
         .wrapper.contents_wrapper
             aside.sidebar
                 ul.tab_nav
                     li.i_32_ui(class = (activeTab == "Staff" ? "active_tab" : ""))
                         a(href='/main/staff', title='Employee', class='StaffPage')
                             span.tab_label Staff
-                            span.tab_info Management
+                            span.tab_info Users
                     li.i_32_tables(class = (activeTab == "Storage" ? "active_tab" : ""))
-                        a(href='/main/storage', title='Some Rows')
-                            span.tab_label Tables
-                            span.tab_info Some Rows
-                    li.i_32_forms
-                        a(href='#', title='Some Fields')
-                            span.tab_label Forms
-                            span.tab_info Some Fields
+                        a(href='/main/storage', title='Storage information')
+                            span.tab_label Storage
+                            span.tab_info Goods
+                    li.i_32_forms(class = (activeTab == "Division" ? "active_tab" : ""))
+                        a(href='/main/division', title='Division information')
+                            span.tab_label Division
+                            span.tab_info division
             .contents
                 #dialog-form
-                    .widget_contents.noPadding
+                    .widget_contents.noPadding.newUserForm
+                        .line_grid
+                            .g_12
+                                span.label.validateTips All form fields are required
                         .line_grid
                             .g_3
-                                span.label Simple Text Field
+                                span.label Username
                             .g_9
-                                input.simple_field(type='text')
+                                input.simple_field.Username(type='text', placeholder='Enter Username')
                         .line_grid
                             .g_3
-                                span.label With Placeholder
+                                span.label Password
                             .g_9
-                                input.simple_field(type='text', placeholder='Any Stuff ..')
+                                input.simple_field.Password(type='text')
                         .line_grid
                             .g_3
-                                span.label With Predefined Value
+                                span.label Division
                             .g_9
-                                input.simple_field(type='text', value='google')
+                                select.simple_form.department
+                                    for division,i in DivisionArr
+                                        option(value= division.idNumber) #{division.name}
+                                //input.simple_field.department(type='text', value='google')
+                        .line_grid
+                            .g_3
+                                span.label Authority
+                            .g_9
+                                select.simple_form.Authority
+                                    option(value='0') Super Admin
+                                    option(value='1') Department Admin
+                                    option(value='2') Employee
+                    .widget_contents.noPadding.newDivisionForm
+                        .line_grid
+                            .g_3
+                                span.label Name
+                            .g_9
+                                input.simple_field.divisionName(type='text', placeholder='Enter Division Name')
+                    .widget_contents.noPadding.newStorageForm
+                        //.line_grid
+                        //    .g_3
+                        //        span.label Name
+                        //    .g_9
+                        //        select.simple_form.department
+                        //            for p,i in ProductCategoryArr
+                        //                option(value= p.idNumber) #{p.name}+#{p.supplierName}
+                        //.line_grid
+                        //    .g_3
+                        //        span.label Price
+                        //    .g_9
+                        //        span.label #{selectedPrice}
+                        //.line_grid
+                        //    .g_3
+                        //        span.label Quantity
+                        //    .g_9
+                        //        input.simple_field.divisionName(type='text', placeholder='Enter Quantity')
+                        //.line_grid
+                        //    .g_3
+                        //        span.label Position
+                        //    .g_9
+                        //        select.simple_form.department
+                        //            for p,i in PositionArr
+                        //                option(value= p.idNumber) #{p.name}
+
+
 
 
                 div.StoragePanel(class = (activeTab != "Storage" ? "hideSelf" : "showSelf"))
                     .g_6.contents_header
-                        h3.i_16_table.tab_label Staff
+                        h3.i_16_table.tab_label Storage
                         div
-                            span.label Add, update or remove users
+                            span.label Inventory Management
+                    .g_6.contents_options
+                        div.simple_buttons
+                            div.i_16_add.bwIcon.addStock Add Stock
                     .g_12
                         .widget_contents.noPadding
-                            table.datatable.tables
+                            table.datatable.tables.StorageList
                                 thead
                                     tr
-                                        th Username
-                                        th Authority
-                                        th Department
+                                        th Number
+                                        th Name
+                                        th Supplier Name
+                                        th Position
+                                        th Price
+                                        th Quantity
                                         th Operations
                                 tbody
-                                    for user in UsersArr
+                                    for stock,i in StorageArr
                                         tr
-                                            td= user.username
-                                            td= user.authority
-                                            td= user.department
+                                            td= stock.idNumber
+                                            td= stock.name
+                                            td= stock.supplierName
+                                            td= stock.positionName
+                                            td= stock.price
+                                            td= stock.quantity
                                             td
                                                 .simple_buttons
                                                     .bwIcon.i_16_settings Operate
@@ -136,16 +192,40 @@ html(lang='en-US')
                                                         // Drop Menu
                                                         ul.drop_menu.menu_with_icons.right_direction
                                                             li
-                                                                a.i_16_add(href='#', title='New User')
+                                                                a.i_16_add(href='#', title='New User', id=i + 1)
                                                                     span.label New User
                                                             li
-                                                                a.i_16_forms(href='#', title='Update User')
+                                                                a.i_16_forms(href='#', title='Update User', id=i + 1)
                                                                     span.label Update User
                                                             li
-                                                                a.i_16_close(href='#', title='Remove User')
+                                                                a.i_16_close(href='#', title='Remove User', id=i + 1)
                                                                     span.label Remove User
-
-
+                div.Division(class = (activeTab != "Division" ? "hideSelf" : "showSelf"))
+                    .g_6.contents_header
+                        h3.i_16_table.tab_label Division
+                        div
+                            span.label Add divisions
+                    .g_6.contents_options
+                        div.simple_buttons
+                            div.bwIcon.i_16_add.addDivision Add Division
+                    .g_12
+                        .widget_contents.noPadding
+                            table.datatable.tables.DivisionsList
+                                thead
+                                    tr
+                                        th Number
+                                        th Name
+                                        th Admin numbers
+                                        th Employee numbers
+                                        th Inventory quantity
+                                tbody
+                                    for division,i in DivisionArr
+                                        tr
+                                            td= division.idNumber
+                                            td= division.name
+                                            td= division.departmentAdminCnt
+                                            td= division.simpleEmployeeCnt
+                                            td= division.goodsCnt
                 div.StaffPanel(class = (activeTab != "Staff" ? "hideSelf" : "showSelf"))
                     .g_6.contents_header
                         h3.i_16_table.tab_label Staff
@@ -157,7 +237,7 @@ html(lang='en-US')
                             table.datatable.tables.Userslist
                                 thead
                                     tr
-                                        th id
+                                        th Number
                                         th Username
                                         th Authority
                                         th Department
@@ -165,7 +245,7 @@ html(lang='en-US')
                                 tbody
                                     for user,i in UsersArr
                                         tr
-                                            td= i + 1
+                                            td= user.idNumber
                                             td= user.username
                                             td= user.authority
                                             td= user.department
@@ -182,6 +262,6 @@ html(lang='en-US')
                                                                 a.i_16_forms.updateUser(href='#', title='Update User', id=i + 1)
                                                                     span.label Update User
                                                             li
-                                                                a.i_16_close.removeUser.bdcC(href='#', title='Remove User', id=i + 1)
+                                                                a.i_16_close.removeUser(href='#', title='Remove User', id=i + 1)
                                                                     span.label Remove User
 

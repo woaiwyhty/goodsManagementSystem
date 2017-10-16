@@ -2,6 +2,12 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var User = require('../dbOperations/user');
+var Department = require('../dbOperations/department');
+var Storage = require('../dbOperations/storage');
+var Supplier = require('../dbOperations/supplier');
+var ProductCategory = require('../dbOperations/productinfo');
+var Position = require('../dbOperations/position');
+var Parser = require('../dbDataParser/parser');
 var LocalStrategy = require('passport-local').Strategy;
 
 /* GET home page. */
@@ -47,14 +53,134 @@ router.post('/removeUser', ensureAuthenticated, function(req, res, next) {
 });
 
 router.post('/newUser', ensureAuthenticated, function(req, res, next) {
-    var info = { username: req.body.username, password: req.body.password,
-        role: req.body.role, department: req.body.department};
-    User.addUser(info, function(err, doc) {
+    User.idNumberInc(function(err, doc) {
         if(err) return next();
-        res.status(200);
-        res.send({retCode: 0});
+        var info = { username: req.body.username, password: req.body.password,
+            role: req.body.role, department: req.body.department, idNumber: doc.idNumber};
+        Department.getIdByName(req.body.department, function(err, doc) {
+            if(err) return next();
+            info.departmentId = doc._id;
+            User.addUser(info, function(err, doc) {
+                if(err) return next();
+                res.status(200);
+                res.send({retCode: 0});
+            });
+        });
+
     });
 });
+
+router.post('/newDivision', ensureAuthenticated, function(req, res, next) {
+    Department.idNumberInc(function(err, doc) {
+        if(err) return next();
+        var info = {
+            name: req.body.name,
+            departmentAdminCnt: 0,
+            simpleEmployeeCnt: 0,
+            goodsCnt: 0,
+            idNumber: doc.idNumber
+        };
+        Department.addDepartment(info, function(err, doc) {
+            if(err) return next();
+            res.status(200);
+            res.send({retCode: 0});
+        });
+    });
+
+});
+
+router.post('/newSupplier', ensureAuthenticated, function(req, res, next) {
+    Supplier.idNumberInc(function(err, doc) {
+        if(err) return next();
+        var info = {
+            name: req.body.name,
+            phone: req.body.phone,
+            addr: req.body.addr,
+            postCode: req.body.postCode,
+            idNumber: doc.idNumber
+        };
+        Supplier.addSupplier(info, function(err, doc) {
+            if(err) return next();
+            res.status(200);
+            res.send({retCode: 0});
+        });
+    });
+
+});
+
+router.post('/newPosition', ensureAuthenticated, function(req, res, next) {
+    Position.idNumberInc(function(err, doc) {
+        if(err) return next();
+        var info = {
+            name: req.body.name,
+            phone: req.body.phone,
+            addr: req.body.addr,
+            postCode: req.body.postCode,
+            idNumber: doc.idNumber
+        };
+        Supplier.addSupplier(info, function(err, doc) {
+            if(err) return next();
+            res.status(200);
+            res.send({retCode: 0});
+        });
+    });
+
+});
+
+router.post('/newProduct', ensureAuthenticated, function(req, res, next) {
+    ProductCategory.idNumberInc(function(err, doc) {
+        if(err) return next();
+        var info = {
+            name: req.body.name,
+            price: req.body.price,
+            productType: Parser.getProductType(req.body.productType),
+            supplierId: null,
+            idNumber: doc.idNumber
+        };
+        Supplier.getIdByName(req.body.supplierName, function(err, doc) {
+            if(err) return next();
+            info.supplierId = doc._id;
+            Supplier.addSupplier(info, function(err, doc)  {
+                if(err) return next();
+                res.status(200);
+                res.send({retCode: 0});
+            })
+        });
+    });
+
+});
+
+router.post('/newStock', ensureAuthenticated, function(req, res, next) {
+    Storage.idNumberInc(function(err, doc) {
+        if(err) return next();
+        var info = {
+            name: req.body.name,
+            productId: null,
+            positionId: null,
+            price: req.body.price,
+            positionName: req.body.positionName,
+            count: req.body.count,
+            stockDate: new Date().now(),
+            idNumber: doc.idNumber
+        };
+        ProductCategory.getIdByIdNumber(req.body.idNumber.product, function(err, doc) {
+            if(err) return next();
+            info.productId = doc._id;
+            Position.getIdByIdNumber(req.body.idNumber.position, function(err, doc) {
+                if(err) return next();
+                info.positionId = doc._id;
+                Storage.addStorage(info, function(err, doc) {
+                    if(err) return next();
+                    res.status(200);
+                    res.send({retCode: 0});
+                });
+            });
+        });
+    });
+
+});
+
+
 
 passport.serializeUser(function(user, done) {
     done(null, user.id); //store login status

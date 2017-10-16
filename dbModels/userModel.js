@@ -30,8 +30,6 @@ module.exports = {
         name: {type: String, required: true, index: 1},
         productId: {type: Schema.Types.ObjectId, ref: 'productinformations'},
         positionId: {type: Schema.Types.ObjectId, ref: 'positions'},
-        supplierName: {type: String},
-        supplierId: {type: Schema.Types.ObjectId, ref: 'suppliers'},
         price: {type: Number},
         positionName: {type: String},
         count: {type: Number},
@@ -43,6 +41,7 @@ module.exports = {
         price: {type:  Number},
         productType: {type: String},
         supplierId: {type: Schema.Types.ObjectId, ref: 'suppliers'},
+        supplierName: {type: String},
         idNumber: {type: Number}
     },
     ids: {
