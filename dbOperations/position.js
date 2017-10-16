@@ -13,16 +13,19 @@ var Position = {
         model.create(info, callback);
     },
     removePositionById: function(idNumber, callback) {
-        model.remove({idNumber: idNumber}, callback);
+        model.removeOne({idNumber: idNumber}, callback);
     },
     removePositionByName: function(name, callback) {
-        model.remove({name: name}, callback);
+        model.removeOne({name: name}, callback);
     },
     getIdByName: function(name, callback) {
         model.find({name: name}, callback);
     },
     idNumberInc: function(callback) {
         ids.findOneAndUpdate({name: 'positions'}, {$inc: {idNumber: 1}}, {new: true}, callback);
+    },
+    getIdByIdNumber: function(idNumber, callback) {
+        model.find({idNumber: idNumber}, callback);
     }
 };
 
