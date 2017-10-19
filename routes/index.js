@@ -180,6 +180,16 @@ router.post('/newStock', ensureAuthenticated, function(req, res, next) {
 
 });
 
+router.get('/getSupplierList', ensureAuthenticated, function(req, res, next) {
+    Supplier.getAllSupplier(function(err, doc) {
+        if(err) return next();
+        for(var i in doc) {
+            var obj = { name: doc[i].name, phone: doc[i].phone
+                , addr: doc[i].addr, postCode: doc[i].postCode, idNumber: doc[i].idNumber };
+            renderData.DivisionArr.push(obj);
+        }
+    })
+});
 
 
 passport.serializeUser(function(user, done) {
