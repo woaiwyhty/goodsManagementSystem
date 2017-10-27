@@ -127,34 +127,6 @@ html(lang='en-US')
                                 span.label Name
                             .g_9
                                 input.simple_field.divisionName(type='text', placeholder='Enter Division Name')
-                    .widget_contents.noPadding.newStorageForm
-                        //.line_grid
-                        //    .g_3
-                        //        span.label Name
-                        //    .g_9
-                        //        select.simple_form.department
-                        //            for p,i in ProductCategoryArr
-                        //                option(value= p.idNumber) #{p.name}+#{p.supplierName}
-                        //.line_grid
-                        //    .g_3
-                        //        span.label Price
-                        //    .g_9
-                        //        span.label #{selectedPrice}
-                        //.line_grid
-                        //    .g_3
-                        //        span.label Quantity
-                        //    .g_9
-                        //        input.simple_field.divisionName(type='text', placeholder='Enter Quantity')
-                        //.line_grid
-                        //    .g_3
-                        //        span.label Position
-                        //    .g_9
-                        //        select.simple_form.department
-                        //            for p,i in PositionArr
-                        //                option(value= p.idNumber) #{p.name}
-
-
-
 
                 div.StoragePanel(class = (activeTab != "Storage" ? "hideSelf" : "showSelf"))
                     .g_6.contents_header
@@ -164,6 +136,40 @@ html(lang='en-US')
                     .g_6.contents_options
                         div.simple_buttons
                             div.i_16_add.bwIcon.addStock Add Stock
+                    .g_12.NewStorageForm.hideSelf
+                        .widget_contents.noPadding
+                            .line_grid
+                                .g_3
+                                    span.label Name
+                                .g_9
+                                    select.simple_form.ProductName
+                                        for p,i in ProductCategoryArr
+                                            option(value= p.idNumber) #{p.name}+#{p.supplierName}
+                            .line_grid
+                                .g_3
+                                    span.label Price
+                                .g_9
+                                    span.label #{selectedPrice}
+                            .line_grid
+                                .g_3
+                                    span.label Quantity
+                                .g_9
+                                    input.simple_field.divisionName(type='text', placeholder='Enter Quantity')
+                            .line_grid
+                                .g_3
+                                    span.label Position
+                                .g_9
+                                    select.simple_form.Position
+                                        for p,i in PositionArr
+                                            option(value= p.idNumber) #{p.name}
+                            .line_grid
+                                .g_3
+                                    div.simple_buttons
+                                        div.bwIcon.i_16_add.ensureAddStock Add Stock
+                                .g_3
+                                    div.simple_buttons
+                                        div.bwIcon.i_16_add.cancelAddStock Cancel
+
                     .g_12
                         .widget_contents.noPadding
                             table.datatable.tables.StorageList
@@ -232,7 +238,6 @@ html(lang='en-US')
                         div
                             span.label Add, update or remove users
                     .g_12
-
                         .widget_contents.noPadding
                             table.datatable.tables.Userslist
                                 thead
