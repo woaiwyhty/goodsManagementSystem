@@ -181,16 +181,28 @@ router.post('/newStock', ensureAuthenticated, function(req, res, next) {
 });
 
 router.get('/getSupplierList', ensureAuthenticated, function(req, res, next) {
+    var returnData = [];
     Supplier.getAllSupplier(function(err, doc) {
         if(err) return next();
         for(var i in doc) {
             var obj = { name: doc[i].name, phone: doc[i].phone
                 , addr: doc[i].addr, postCode: doc[i].postCode, idNumber: doc[i].idNumber };
-            renderData.DivisionArr.push(obj);
+            returnData.push(obj);
         }
+        res.send({retCode: 0, infoArr: returnData});
     })
 });
-
+router.get('/getPositionList', ensureAuthenticated, function(req, res, next) {
+    var returnData = [];
+    Position.getAllPosition(function(err, doc) {
+        if(err) return next();
+        for(var i in doc) {
+            var obj = { name: doc[i].name, idNumber: doc[i].idNumber };
+            returnData.push(obj);
+        }
+        res.send({retCode: 0, infoArr: returnData});
+    })
+});
 
 passport.serializeUser(function(user, done) {
     done(null, user.id); //store login status
