@@ -80,10 +80,13 @@ $(document).ready(function() {
         nowPage = 1;
     });
     $('div.addStock').click(function() {
-        $('#dialog-form').dialog('open').dialog('option', 'title', 'New Stock');
-        formFields.hide();
-        newStockForm.show();
-        nowPage = 2;
-    })
+        $('div.NewStorageForm').show();
+    });
+    $('div.cancelAddStock').click(function() {
+        $('div.NewStorageForm').hide();
+    });
+    $('div.ensureAddStock').click(function() {
+
+    });
 });
 
