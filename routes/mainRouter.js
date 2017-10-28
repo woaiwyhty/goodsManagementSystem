@@ -24,6 +24,7 @@ router.get('/staff', ensureAuthenticated, function(req, res, next) {
         DivisionArr: [], ProductCategoryArr:[],
         selectedPrice: 0, PositionArr: [],
         mainTitle: "Welcome to Dashboard",
+        CategoryArr: [],
         loginName: req.session.user.username, activeTab: "Staff"
     };
     User.getAllUsers(0, function(err, doc) {
@@ -53,7 +54,8 @@ router.get('/staff', ensureAuthenticated, function(req, res, next) {
 
 });
 router.get('/storage', ensureAuthenticated, function(req, res, next) {
-    var renderData = { UsersArr: [], StorageArr: [], DivisionArr: [], ProductCategoryArr:[], selectedPrice: 0, PositionArr:[],
+    var renderData = { UsersArr: [], StorageArr: [], DivisionArr: [], ProductCategoryArr:[],
+        selectedPrice: 0, PositionArr:[], CategoryArr: [],
         mainTitle: "Welcome to Dashboard", loginName: req.session.user.username, activeTab: "Storage"};
     Storage.getAllStorage(function(err, doc) {
         if(err) return next();
@@ -70,7 +72,8 @@ router.get('/storage', ensureAuthenticated, function(req, res, next) {
 
 
 router.get('/division', ensureAuthenticated, function(req, res, next) {
-    var renderData = { UsersArr: [], StorageArr: [], DivisionArr: [], ProductCategoryArr:[], selectedPrice: 0, PositionArr:[],
+    var renderData = { UsersArr: [], StorageArr: [], DivisionArr: [], ProductCategoryArr:[],
+        selectedPrice: 0, PositionArr:[], CategoryArr: [],
         mainTitle: "Welcome to Dashboard", loginName: req.session.user.username, activeTab: "Division"};
     Department.getAllDepartments(function(err, doc) {
         if(err) return next();
@@ -84,6 +87,43 @@ router.get('/division', ensureAuthenticated, function(req, res, next) {
     });
 });
 
+router.get('/position', ensureAuthenticated, function(req, res, next) {
+    var renderData = { UsersArr: [], StorageArr: [], DivisionArr: [],
+        ProductCategoryArr:[], selectedPrice: 0, PositionArr:[], CategoryArr: [],
+        mainTitle: "Welcome to Dashboard",
+        loginName: req.session.user.username, activeTab: "Position"};
+    Position.getAllPosition(function(err, doc) {
+        if(err) return next();
+        for(var i in doc) {
+            var obj = { name: doc[i].name, idNumber: doc[i].idNumber };
+            renderData.PositionArr.push(obj);
+        }
+
+        res.render('main', renderData);
+    });
+});
+
+router.get('/category', ensureAuthenticated, function(req, res, next) {
+    var renderData = { UsersArr: [], StorageArr: [], DivisionArr: [],
+        ProductCategoryArr:[], selectedPrice: 0, PositionArr:[], CategoryArr: [],
+        mainTitle: "Welcome to Dashboard",
+        loginName: req.session.user.username, activeTab: "Category"};
+    ProductCategory.getAllProductCategory(function(err, doc) {
+        if(err) return next();
+        for(var i in doc) {
+            var obj = {
+                name: doc[i].name,
+                idNumber: doc[i].idNumber,
+                price: doc[i].price,
+                productType: doc[i].productType,
+                supplierName: doc[i].supplierName
+            };
+            renderData.PositionArr.push(obj);
+        }
+
+        res.render('main', renderData);
+    });
+});
 
 
 function ensureAuthenticated(req, res, next){
