@@ -74,6 +74,10 @@ html(lang='en-US')
                     a.i_22_tables(title='Storage', href='/main/storage')
                 li
                     a.i_22_forms(title='Department', href='/main/division')
+                li
+                    a.i_22_dashboard(title='Position', href='/main/position')
+                li
+                    a.i_22_dashboard(title='Category', href='/main/category')
         .wrapper.contents_wrapper
             aside.sidebar
                 ul.tab_nav
@@ -89,6 +93,14 @@ html(lang='en-US')
                         a(href='/main/division', title='Division information')
                             span.tab_label Division
                             span.tab_info division
+                    li.i_32_dashboard(class = (activeTab == "Position" ? "active_tab" : ""))
+                        a(href='/main/position', title='Position information')
+                            span.tab_label Position
+                            span.tab_info position
+                    li.i_32_dashboard(class = (activeTab == "Category" ? "active_tab" : ""))
+                        a(href='/main/category', title='Category information')
+                            span.tab_label Category
+                            span.tab_info category
             .contents
                 #dialog-form
                     .widget_contents.noPadding.newUserForm
@@ -270,3 +282,66 @@ html(lang='en-US')
                                                                 a.i_16_close.removeUser(href='#', title='Remove User', id=i + 1)
                                                                     span.label Remove User
 
+                div.PositionPanel(class = (activeTab != "Position" ? "hideSelf" : "showSelf"))
+                    .g_6.contents_header
+                        h3.i_16_table.tab_label Position
+                        div
+                            span.label Add positions
+                    .g_6.contents_options
+                        div.simple_buttons
+                            div.bwIcon.i_16_add.addPosition Add position
+                    .g_12
+                        .widget_contents.noPadding
+                            table.datatable.tables.PositionLists
+                                thead
+                                    tr
+                                        th Number
+                                        th Name
+                                        th Remove
+                                tbody
+                                    for pos,i in PositionArr
+                                        tr
+                                            td= pos.idNumber
+                                            td= pos.name
+                                            td
+                                                .simple_buttons
+                                                    div.bwIcon.i_16_close.removePosition Remove
+                div.CategoryPanel(class = (activeTab != "Category" ? "hideSelf" : "showSelf"))
+                    .g_6.contents_header
+                        h3.i_16_table.tab_label Product Category
+                        div
+                            span.label Add, update or remove product categories
+                    .g_12
+                        .widget_contents.noPadding
+                            table.datatable.tables.CategoryLists
+                                thead
+                                    tr
+                                        th Number
+                                        th Name
+                                        th Price
+                                        th Product Type
+                                        th Supplier Name
+                                        th Manipulations
+                                tbody
+                                    for cat,i in CategoryArr
+                                        tr
+                                            td= cat.idNumber
+                                            td= cat.name
+                                            td= cat.price
+                                            td= cat.productType
+                                            td= cat.supplierName
+                                            td
+                                                .simple_buttons
+                                                    .bwIcon.i_16_settings Operate
+                                                    .buttons_arrow
+                                                        // Drop Menu
+                                                        ul.drop_menu.menu_with_icons.right_direction
+                                                            li
+                                                                a.i_16_add.addUser(href='#', title='New Category', id=i + 1)
+                                                                    span.label New Category
+                                                            li
+                                                                a.i_16_forms.updateUser(href='#', title='Update Category', id=i + 1)
+                                                                    span.label Update Category
+                                                            li
+                                                                a.i_16_close.removeUser(href='#', title='Remove Category', id=i + 1)
+                                                                    span.label Remove Category
