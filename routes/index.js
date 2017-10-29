@@ -113,12 +113,9 @@ router.post('/newPosition', ensureAuthenticated, function(req, res, next) {
         if(err) return next();
         var info = {
             name: req.body.name,
-            phone: req.body.phone,
-            addr: req.body.addr,
-            postCode: req.body.postCode,
             idNumber: doc.idNumber
         };
-        Supplier.addSupplier(info, function(err, doc) {
+        Position.addPosition(info, function(err, doc) {
             if(err) return next();
             res.status(200);
             res.send({retCode: 0});
