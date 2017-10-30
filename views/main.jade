@@ -78,6 +78,8 @@ html(lang='en-US')
                     a.i_22_dashboard(title='Position', href='/main/position')
                 li
                     a.i_22_dashboard(title='Category', href='/main/category')
+                li
+                    a.i_22_dashboard(title='Supplier', href='/main/supplier')
         .wrapper.contents_wrapper
             aside.sidebar
                 ul.tab_nav
@@ -101,6 +103,10 @@ html(lang='en-US')
                         a(href='/main/category', title='Category information')
                             span.tab_label Category
                             span.tab_info category
+                    li.i_32_dashboard(class = (activeTab == "Supplier" ? "active_tab" : ""))
+                        a(href='/main/supplier', title='Category information')
+                            span.tab_label Supplier
+                            span.tab_info supplier
             .contents
                 #dialog-form
                     .widget_contents.noPadding.newUserForm
@@ -345,3 +351,42 @@ html(lang='en-US')
                                                             li
                                                                 a.i_16_close.removeUser(href='#', title='Remove Category', id=i + 1)
                                                                     span.label Remove Category
+                div.SupplierPanel(class = (activeTab != "Supplier" ? "hideSelf" : "showSelf"))
+                    .g_6.contents_header
+                        h3.i_16_table.tab_label Supplier
+                        div
+                            span.label Add, update or remove suppliers
+                    .g_12
+                        .widget_contents.noPadding
+                            table.datatable.tables.SupplierList
+                                thead
+                                    tr
+                                        th Number
+                                        th Name
+                                        th Phone
+                                        th Address
+                                        th Postal code
+                                        th Manipulations
+                                tbody
+                                    for sup,i in SupplierArr
+                                        tr
+                                            td= sup.idNumber
+                                            td= sup.name
+                                            td= sup.phone
+                                            td= sup.addr
+                                            td= sup.postCode
+                                            td
+                                                .simple_buttons
+                                                    .bwIcon.i_16_settings Operate
+                                                    .buttons_arrow
+                                                        // Drop Menu
+                                                        ul.drop_menu.menu_with_icons.right_direction
+                                                            li
+                                                                a.i_16_add.addUser(href='#', title='New Supplier', id=i + 1)
+                                                                    span.label New Supplier
+                                                            li
+                                                                a.i_16_forms.updateUser(href='#', title='Update Supplier', id=i + 1)
+                                                                    span.label Update Supplier
+                                                            li
+                                                                a.i_16_close.removeUser(href='#', title='Remove Supplier', id=i + 1)
+                                                                    span.label Remove Supplier
