@@ -124,7 +124,8 @@ router.post('/newPosition', ensureAuthenticated, function(req, res, next) {
 
 });
 
-router.post('/newProduct', ensureAuthenticated, function(req, res, next) {
+router.post('/newCategory', ensureAuthenticated, function(req, res, next) {
+    console.log(111);
     ProductCategory.idNumberInc(function(err, doc) {
         if(err) return next();
         var info = {
@@ -132,12 +133,13 @@ router.post('/newProduct', ensureAuthenticated, function(req, res, next) {
             price: req.body.price,
             productType: Parser.getProductType(req.body.productType),
             supplierId: null,
-            idNumber: doc.idNumber
+            idNumber: doc.idNumber,
+            supplierName: req.body.supplierName
         };
         Supplier.getIdByName(req.body.supplierName, function(err, doc) {
             if(err) return next();
-            info.supplierId = doc._id;
-            Supplier.addSupplier(info, function(err, doc)  {
+            info.supplierId = doc[0]._id;
+            ProductCategory.addProductCategory(info, function(err, doc)  {
                 if(err) return next();
                 res.status(200);
                 res.send({retCode: 0});
