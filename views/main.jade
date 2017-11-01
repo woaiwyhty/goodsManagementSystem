@@ -13,7 +13,7 @@ html(lang='en-US')
         // The Main CSS File
         link(rel='stylesheet', href='/CSS/style.css')
         //BootStrap
-        link(rel='stylesheet', href='/CSS/bootstrap.min.css')
+        //link(rel='stylesheet', href='/CSS/bootstrap.min.css')
         script(src='/Javascript/bootstrap.min.js')
         // jQuery
         script(src='/Javascript/jQuery/jquery-1.7.2.min.js')
@@ -49,6 +49,7 @@ html(lang='en-US')
         script(src='/Javascript/ColorBox/jquery.colorbox.js')
         // Kanrisha Script
         script(src='/Javascript/kanrisha.js')
+        script(src='/Javascript/validationform.js')
         script(src='/Javascript/mainEvents.js')
         meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
     body
@@ -298,6 +299,21 @@ html(lang='en-US')
                     .g_6.contents_options
                         div.simple_buttons
                             div.bwIcon.i_16_add.addPosition Add position
+                    .g_12.NewPositionForm.hideSelf
+                        .widget_contents.noPadding
+                            .line_grid
+                                .g_3
+                                    span.label Name
+                                .g_9
+                                    input.simple_field.positionName(type='text', placeholder='Enter Position Name')
+                            .line_grid
+                                .g_3
+                                    div.simple_buttons
+                                        div.bwIcon.i_16_add.ensureAddPosition Add Position
+                                .g_3
+                                    div.simple_buttons
+                                        div.bwIcon.i_16_add.cancelAddPosition Cancel
+
                     .g_12
                         .widget_contents.noPadding
                             table.datatable.tables.PositionLists
@@ -319,6 +335,40 @@ html(lang='en-US')
                         h3.i_16_table.tab_label Product Category
                         div
                             span.label Add, update or remove product categories
+                    .g_6.contents_options
+                        div.simple_buttons
+                            div.bwIcon.i_16_add.addCategory Add category
+                    .g_12.NewCategoryForm.hideSelf
+                        .widget_contents.noPadding
+                            .line_grid
+                                .g_3
+                                    span.label Name
+                                .g_9
+                                    input.simple_field.categoryName(type='text', placeholder='Enter Category Name')
+                            .line_grid
+                                .g_3
+                                    span.label Price
+                                .g_9
+                                    input.simple_field.categoryPrice(type='text', placeholder='Enter Phone')
+                            .line_grid
+                                .g_3
+                                    span.label Type
+                                .g_9
+                                    select.simple_form.categoryType(autocomplete='off')
+                                        option(value= 1) OTC
+                                        option(value= 2) Rx
+                            .line_grid
+                                .g_3
+                                    span.label Supplier
+                                .g_9
+                                    select.simple_form.categorySupplier(id='testId')
+                            .line_grid
+                                .g_3
+                                    div.simple_buttons
+                                        div.bwIcon.i_16_add.ensureAddCategory Add Category
+                                .g_3
+                                    div.simple_buttons
+                                        div.bwIcon.i_16_add.cancelAddCategory Cancel
                     .g_12
                         .widget_contents.noPadding
                             table.datatable.tables.CategoryLists
@@ -340,24 +390,44 @@ html(lang='en-US')
                                             td= cat.supplierName
                                             td
                                                 .simple_buttons
-                                                    .bwIcon.i_16_settings Operate
-                                                    .buttons_arrow
-                                                        // Drop Menu
-                                                        ul.drop_menu.menu_with_icons.right_direction
-                                                            li
-                                                                a.i_16_add.addUser(href='#', title='New Category', id=i + 1)
-                                                                    span.label New Category
-                                                            li
-                                                                a.i_16_forms.updateUser(href='#', title='Update Category', id=i + 1)
-                                                                    span.label Update Category
-                                                            li
-                                                                a.i_16_close.removeUser(href='#', title='Remove Category', id=i + 1)
-                                                                    span.label Remove Category
+                                                    div.bwIcon.i_16_close.removeCategory Remove
                 div.SupplierPanel(class = (activeTab != "Supplier" ? "hideSelf" : "showSelf"))
                     .g_6.contents_header
                         h3.i_16_table.tab_label Supplier
                         div
                             span.label Add, update or remove suppliers
+                    .g_6.contents_options
+                        div.simple_buttons
+                            div.bwIcon.i_16_add.addSupplier Add supplier
+                    .g_12.NewSupplierForm.hideSelf
+                        .widget_contents.noPadding
+                            .line_grid
+                                .g_3
+                                    span.label Name
+                                .g_9
+                                    input.simple_field.supplierName(type='text', placeholder='Enter Supplier Name')
+                            .line_grid
+                                .g_3
+                                    span.label Phone
+                                .g_9
+                                    input.simple_field.supplierPhone(type='text', placeholder='Enter Phone')
+                            .line_grid
+                                .g_3
+                                    span.label Address
+                                .g_9
+                                    input.simple_field.supplierAddr(type='text', placeholder='Enter Address')
+                            .line_grid
+                                .g_3
+                                    span.label Postal Code
+                                .g_9
+                                    input.simple_field.supplierPostalCode(type='text', placeholder='Enter Postal Code')
+                            .line_grid
+                                .g_3
+                                    div.simple_buttons
+                                        div.bwIcon.i_16_add.ensureAddSupplier Add Supplier
+                                .g_3
+                                    div.simple_buttons
+                                        div.bwIcon.i_16_add.cancelAddSupplier Cancel
                     .g_12
                         .widget_contents.noPadding
                             table.datatable.tables.SupplierList
@@ -379,16 +449,4 @@ html(lang='en-US')
                                             td= sup.postCode
                                             td
                                                 .simple_buttons
-                                                    .bwIcon.i_16_settings Operate
-                                                    .buttons_arrow
-                                                        // Drop Menu
-                                                        ul.drop_menu.menu_with_icons.right_direction
-                                                            li
-                                                                a.i_16_add.addUser(href='#', title='New Supplier', id=i + 1)
-                                                                    span.label New Supplier
-                                                            li
-                                                                a.i_16_forms.updateUser(href='#', title='Update Supplier', id=i + 1)
-                                                                    span.label Update Supplier
-                                                            li
-                                                                a.i_16_close.removeUser(href='#', title='Remove Supplier', id=i + 1)
-                                                                    span.label Remove Supplier
+                                                    div.bwIcon.i_16_close.removeSupplier Remove
