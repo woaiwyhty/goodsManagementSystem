@@ -16,7 +16,7 @@ var ProductCategory = {
         model.removeOne({idNumber: idNumber}, callback);
     },
     getIdByIdNumber: function(idNumber, callback) {
-        model.find({idNumber: idNumber}, callback);
+        model.findOne({idNumber: idNumber}, callback);
     },
     idNumberInc: function(callback) {
         ids.findOneAndUpdate({name: 'productInformations'}, {$inc: {idNumber: 1}}, {new: true}, callback);
